@@ -13,7 +13,9 @@ export async function main() {
         subject.next('truc ' + (new Date().getTime() - startDate));
     } , 1200);
     const result = await test().catch(handleError);
+    // this will wait for test to finish before continuing
     const otherResult = await promise(1000 , true).catch(handleError);
+    // otherResult will be undefined
     // const otherResultWithoutCatch = await promise(1000 , true); // .catch(handleError); // unhandled rejections are deprecated
     const otherResult2 = await promise(0).catch(handleError);
     console.log(result);
@@ -38,7 +40,7 @@ export function handleError(err: any){
 export function promise(timeout: number = 1000 , throwError: boolean = false): Promise<string>{
     return new Promise((res , rej)=> {
         // if(throwError) throw new Error('hi'); // can throw error as well as reject
-        if(throwError) rej('error')
+        if(throwError) rej('rejected with no reason ' + (new Date().getTime() - startDate) + 'ms')
         setTimeout(() => {
             res('promise ' + (new Date().getTime() - startDate) + 'ms');
         } , timeout);
