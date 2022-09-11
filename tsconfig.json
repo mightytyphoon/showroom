@@ -8,7 +8,5 @@
     "strictNullChecks": true,
     "noImplicitAny": true
   },
-  "files": [
-    "main.ts"
-  ]
+  "include": ["./src"]
 }
